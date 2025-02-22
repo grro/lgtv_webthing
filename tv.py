@@ -60,9 +60,7 @@ class Tv:
                 if status == WebOSClient.PROMPTED:
                     logging.info("Please accept the connect on the TV!")
             self.__save_store(store)
-
-            logging.info("tv (" + self.ip_address + ") connected ")
-            self.__read()
+            logging.info("Tv (" + self.ip_address + ") connected ")
 
         except Exception as e:
             self.client = None
@@ -97,7 +95,7 @@ class Tv:
             media = MediaControl(self.client)
             audio = media.get_audio_output().data
             if audio != self.__audio:
-                logging.info("audio = " + audio)
+                logging.info("audio updated to " + audio)
                 self.__audio = audio
                 self.__notify_listener()
 
