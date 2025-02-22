@@ -1,0 +1,5 @@
+requests>=2.32.0
+redzoo>=0.3.7
+webthing>=0.15.0
+pywebostv==0.8.9
+
