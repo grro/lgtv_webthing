@@ -10,7 +10,7 @@ from pywebostv.controls import MediaControl, AudioOutputSource
 
 class Tv:
 
-    def __init__(self, ip_address: str, dir: str = "C:\\temp"):
+    def __init__(self, ip_address: str, dir: str):
         self.running = True
         self.__listener = lambda: None
         self.ip_address = ip_address

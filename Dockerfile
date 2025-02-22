@@ -2,7 +2,7 @@ FROM python:3.11
 
 ENV port 8080
 ENV ip_address 0.0.0.0
-ENV dir /app/store
+ENV dir /etc/tv
 
 
 RUN cd /etc
