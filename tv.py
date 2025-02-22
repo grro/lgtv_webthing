@@ -19,7 +19,6 @@ class Tv:
         self.store_file = os.path.join(dir, 'tv.pkl')
         logging.info("using store file " + self.store_file)
         self.client = None
-        self.media = None
         self.__audio = ''
         Thread(target=self.__receive_loop, daemon=True).start()
 
@@ -62,9 +61,8 @@ class Tv:
                     logging.info("Please accept the connect on the TV!")
             self.__save_store(store)
 
-            self.media = MediaControl(self.client)
-            self.__read()
             logging.info("tv (" + self.ip_address + ") connected ")
+            self.__read()
 
         except Exception as e:
             self.client = None
@@ -89,13 +87,15 @@ class Tv:
             else:
                 new_audio = 'external_arc'
                 logging.info("setting audio = ARC(" + new_audio + ")")
-            self.media.set_audio_output(AudioOutputSource(new_audio))
+            media = MediaControl(self.client)
+            media.set_audio_output(AudioOutputSource(new_audio))
             self.__read()
             self.__notify_listener()
 
     def __read(self):
         if self.client is not None:
-            audio = self.media.get_audio_output().data
+            media = MediaControl(self.client)
+            audio = media.get_audio_output().data
             if audio != self.__audio:
                 logging.info("audio = " + audio)
                 self.__audio = audio
